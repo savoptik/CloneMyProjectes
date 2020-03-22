@@ -1,8 +1,6 @@
 import os
 import ConsoleCommandes as cc
 
-print(os.uname())
-
 with open("Repolinc") as file:
     arry = [row.strip() for  row in file]
 
@@ -18,10 +16,10 @@ def install(path):
 for row in arry:
     dirName = row[row.rfind("/"):-4]
     if os.path.exists(os.getcwd() + dirName):
-        print("папка" + dirName + "найдена")
+        print("папка " + dirName[1:] + " найдена")
         install(dirName)
     else:
-        print("папка" + dirName + "не найдена")
+        print("Папка " + dirName[1:] + " не найдена")
         print("Клонирую")
         cc.gitClone(row)
         install(dirName)
