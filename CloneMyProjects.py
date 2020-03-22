@@ -7,21 +7,21 @@ with open("Repolinc") as file:
     arry = [row.strip() for  row in file]
 
 def install(path):
-    cc.cdDirIn(path)
-    if os.path.exists(os.getcwd() + '.gitmodules'):
+    print("Установка зависимостей")
+    os.chdir(os.getcwd() + path)
+    if os.path.exists('./.gitmodules'):
         cc.gitSubmodule()
-    if os.path.exists(os.getcwd() + "Podfile"):
+    if os.path.exists('./Podfile'):
         cc.podInstall()
-    cc.cdDirOut()
+    os.chdir('..')
 
 for row in arry:
     dirName = row[row.rfind("/"):-4]
-    print(dirName)
     if os.path.exists(os.getcwd() + dirName):
-        print("папка найдена")
+        print("папка" + dirName + "найдена")
         install(dirName)
     else:
-        print("папка не найдена")
+        print("папка" + dirName + "не найдена")
         print("Клонирую")
         cc.gitClone(row)
         install(dirName)
