@@ -1,9 +1,6 @@
 import os
 import ConsoleCommandes as cc
 
-with open("Repolinc") as file:
-    arry = [row.strip() for  row in file]
-
 def install(path):
     print("Установка зависимостей")
     os.chdir(os.getcwd() + path)
@@ -12,6 +9,9 @@ def install(path):
     if os.path.exists('./Podfile'):
         cc.podInstall()
     os.chdir('..')
+
+with open("Repolinc") as file:
+    arry = [row.strip() for  row in file]
 
 for row in arry:
     dirName = row[row.rfind("/"):-4]
